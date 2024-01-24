@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-import turndown
+import html2text
 
 app = Flask(__name__)
 
@@ -13,9 +13,8 @@ def index():
     return render_template('index.html')
 
 def convert_to_markdown(html_input):
-    # Turndownライブラリを使用してHTMLをMarkdownに変換
-    converter = turndown.TurndownService()
-    markdown_output = converter.turndown(html_input)
+    # html2textライブラリを使用してHTMLをMarkdownに変換
+    markdown_output = html2text.html2text(html_input)
     return markdown_output
 
 if __name__ == '__main__':
