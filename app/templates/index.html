@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML to Markdown Converter</title>
+</head>
+<body>
+    <h1>HTML to Markdown Converter</h1>
+    <form method="post">
+        <textarea name="html_input" rows="10" placeholder="Enter HTML here">{{ request.form['html_input'] }}</textarea>
+        <br>
+        <input type="submit" value="Convert">
+    </form>
+    {% if markdown_output %}
+        <h2>Markdown Output</h2>
+        <textarea rows="10" readonly>{{ markdown_output }}</textarea>
+    {% endif %}
+</body>
+</html>
