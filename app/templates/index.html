@@ -5,11 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text to Markdown Converter</title>
+    <!-- Quill CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 </head>
 <body>
     <h1>Text to Markdown Converter</h1>
     <form method="post">
-        <textarea name="text_input" rows="10" placeholder="Enter text here">{{ request.form['text_input'] }}</textarea>
+        <!-- Quill Editor -->
+        <div id="editor"></div>
+        <!-- Hidden Textarea for Form Submission -->
+        <textarea name="text_input" style="display: none;"></textarea>
         <br>
         <input type="submit" value="Convert">
     </form>
@@ -19,5 +24,22 @@
             {{ markdown_output|safe }}
         </div>
     {% endif %}
+
+    <!-- Quill JS -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+    <script>
+        // Initialize Quill
+        var quill = new Quill('#editor', {
+            theme: 'snow',
+            placeholder: 'Enter text here...',
+        });
+
+        // Get HTML content from Quill and set it in the hidden textarea on form submission
+        document.querySelector('form').onsubmit = function() {
+            var quillContent = quill.root.innerHTML;
+            document.querySelector('textarea[name="text_input"]').value = quillContent;
+        };
+    </script>
 </body>
 </html>
