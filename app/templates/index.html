@@ -21,7 +21,7 @@
     {% if markdown_output %}
         <h2>Markdown Output</h2>
         <div>
-            {{ markdown_output|safe }}
+            {{ markdown_output|escape }}
         </div>
     {% endif %}
 
@@ -33,6 +33,19 @@
         var quill = new Quill('#editor', {
             theme: 'snow',
             placeholder: 'Enter text here...',
+            modules: {
+                toolbar: {
+                    container: [
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{'header': 1}, {'header': 2}],
+                        [{'list': 'ordered'}, {'list': 'bullet'}],
+                        [{'code-block': true}], // Code block button
+                        [{'color': []}],
+                        ['link'],
+                        ['clean']
+                    ],
+                },
+            },
         });
 
         // Get HTML content from Quill and set it in the hidden textarea on form submission
