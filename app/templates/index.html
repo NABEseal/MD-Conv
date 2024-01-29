@@ -57,8 +57,17 @@
 
             // Convert HTML to Markdown using dompurify and to-markdown
             var cleanHtml = DOMPurify.sanitize(quillContent);
-            var markdownContent = toMarkdown(cleanHtml);
-            
+            var markdownContent = toMarkdown(cleanHtml, {
+                converters: [
+                    {
+                        filter: 'code',
+                        replacement: function(content) {
+                            return '```\n' + content + '\n```\n';
+                        }
+                    }
+                ]
+            });
+
             // Display Markdown output
             document.getElementById('markdownOutput').innerHTML = '<pre>' + markdownContent + '</pre>';
         });
