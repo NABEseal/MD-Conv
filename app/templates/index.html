@@ -36,17 +36,14 @@
         // Initialize Quill
         var quill = new Quill('#editor', {
             theme: 'snow',
-            // placeholder: 'Enter text here...',
             modules: {
                 toolbar: {
                     container: [
                         ['bold', 'italic', 'underline', 'strike'],
                         [{'header': 1}, {'header': 2}],
                         [{'list': 'ordered'}, {'list': 'bullet'}],
-                        [{'code-block': true}], // Code block button
-                        // [{'color': []}],
-                        ['link'],
-                        ['image'], // Image button
+                        ['code', 'code-block'], // Changed code block icon
+                        ['link', 'image', 'video'],
                         ['clean']
                     ],
                 },
