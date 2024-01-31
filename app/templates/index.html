@@ -16,7 +16,7 @@
 </head>
 <body class="bg-gray-100 p-4">
     <div class="max-w-2xl mx-auto">
-        <h1 class="text-2xl font-bold mb-4">テキストをマークダウンに変換</h1>
+        <h1 class="text-2xl font-bold mb-4">Text to Markdown Converter</h1>
         
         <!-- フォーム -->
         <form method="post" id="convertForm">
@@ -42,12 +42,12 @@
                 toolbar: {
                     // ツールバーのボタン構成
                     container: [
+                        [{ 'header': [false, 1, 2, 3, 4, 5, 6] }], // 見出し
                         ['bold', 'italic', 'underline', 'strike'], // テキスト装飾
-                        [{'header': 1}, {'header': 2}], // 見出し
                         [{'list': 'ordered'}, {'list': 'bullet'}], // 番号付きリスト、箇条書きリスト
-                        ['code', 'code-block'], // インラインコード、コードブロック
+                        ['blockquote', 'code', 'code-block'], // インラインコード、コードブロック、引用
                         ['link', 'image', 'video'], // リンク、画像、動画
-                        ['clean'] // フォーマットのクリア
+                        ['clean'], // フォーマットのクリア
                     ],
                 },
             },
