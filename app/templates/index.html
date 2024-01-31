@@ -15,20 +15,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/to-markdown/3.1.0/to-markdown.js"></script>
 </head>
 <body class="bg-gray-100 p-4">
-    <div class="max-w-2xl mx-auto">
-        <h1 class="text-2xl font-bold mb-4">Text to Markdown Converter</h1>
-        
-        <!-- フォーム -->
-        <form method="post" id="convertForm">
-            <!-- Quill エディタ -->
-            <div id="editor" class="bg-white p-4 border rounded-md mb-4"></div>
-            <!-- フォーム送信用の非表示テキストエリア -->
-            <textarea name="text_input" style="display: none;"></textarea>
-        </form>
+    <a href="/">
+        <h1 class="text-2xl font-bold mb-4">MD-Conv</h1>
+    </a>
+    <div class="mx-auto flex">
+        <!-- 入力欄 -->
+        <div class="w-1/2 mr-2 align-top"> <!-- align-top クラスを追加 -->
+            <!-- フォーム -->
+            <form method="post" id="convertForm">
+                <!-- Quill エディタ -->
+                <div id="editor" class="bg-white min-h-fit border rounded-md mb-4"></div>
+                <!-- フォーム送信用の非表示テキストエリア -->
+                <textarea name="text_input" style="display: none;"></textarea>
+            </form>
+        </div>
 
-        <!-- マークダウンの出力 -->
-        <h2 class="text-xl font-bold mb-2">マークダウンの出力</h2>
-        <div id="markdownOutput" class="bg-white p-4 border rounded-md overflow-auto max-h-72"></div>
+        <!-- 出力欄 -->
+        <div class="w-1/2 ml-2 align-top"> <!-- align-top クラスを追加 -->
+            <h2 class="text-xl font-bold mb-4">OUTPUT</h2>
+            <div id="markdownOutput" class="bg-white p-4 border rounded-md overflow-auto min-h-fit"></div>
+            <!-- コピー ボタン -->
+            <button id="copyButton" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">コピー</button>
+        </div>
     </div>
 
     <!-- Quill JS -->
@@ -45,7 +53,7 @@
                         [{ 'header': [false, 1, 2, 3, 4, 5, 6] }], // 見出し
                         ['bold', 'italic', 'underline', 'strike'], // テキスト装飾
                         [{'list': 'ordered'}, {'list': 'bullet'}], // 番号付きリスト、箇条書きリスト
-                        ['blockquote', 'code', 'code-block'], // インラインコード、コードブロック、引用
+                        ['blockquote', 'code', 'code-block'], // 引用、インラインコード、コードブロック
                         ['link', 'image', 'video'], // リンク、画像、動画
                         ['clean'], // フォーマットのクリア
                     ],
@@ -102,6 +110,26 @@
         // quill.on('text-change', function() {
         //     document.getElementById('convertForm').submit();
         // });
+
+        // コピー ボタンのクリックイベント
+        document.getElementById('copyButton').addEventListener('click', function() {
+            // 出力エリアのテキストを取得
+            var markdownOutput = document.getElementById('markdownOutput').innerText;
+
+            // テキストエリアを作成し、取得したテキストをセット
+            var textarea = document.createElement('textarea');
+            textarea.value = markdownOutput;
+
+            // ボディに追加して選択状態にする
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            // コピー操作を実行
+            document.execCommand('copy');
+
+            // ボディからテキストエリアを削除
+            document.body.removeChild(textarea);
+        });
     </script>
 </body>
 </html>
