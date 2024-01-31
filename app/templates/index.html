@@ -17,7 +17,7 @@
 <body class="bg-gray-100 p-4">
     <div class="max-w-2xl mx-auto">
         <h1 class="text-2xl font-bold mb-4">Text to Markdown Converter</h1>
-
+        
         <form method="post" id="convertForm">
             <!-- Quill Editor -->
             <div id="editor" class="bg-white p-4 border rounded-md mb-4"></div>
@@ -36,6 +36,7 @@
         // Initialize Quill
         var quill = new Quill('#editor', {
             theme: 'snow',
+            // placeholder: 'Enter text here...',
             modules: {
                 toolbar: {
                     container: [
@@ -45,6 +46,7 @@
                         [{'code-block': true}], // Code block button
                         // [{'color': []}],
                         ['link'],
+                        ['image'], // Image button
                         ['clean']
                     ],
                 },
@@ -91,7 +93,7 @@
                     }
                 ]
             });
-
+            
             // Display Markdown output
             document.getElementById('markdownOutput').innerHTML = '<pre>' + markdownContent + '</pre>';
         });
