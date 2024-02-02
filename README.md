@@ -1,2 +1,2 @@
-# MD-Conv
-Markdownを簡単に作りたい
+# MD-Editor
+Markdownを簡単に書きたい
